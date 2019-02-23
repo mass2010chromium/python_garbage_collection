@@ -99,6 +99,7 @@ x = np.zeros((len(questions), MAXLEN, len(chars)), dtype=np.bool)
 y = np.zeros((len(questions), DIGITS + 1, len(chars)), dtype=np.bool)
 for i, sentence in enumerate(questions):
     x[i] = ctable.encode(sentence, MAXLEN)
+    print()
 for i, sentence in enumerate(expected):
     y[i] = ctable.encode(sentence, DIGITS + 1)
 
@@ -156,7 +157,7 @@ model.summary()
 
 # Train the model each generation and show predictions against the validation
 # dataset.
-for iteration in range(1, 200):
+for iteration in range(1, 0):
     print()
     print('-' * 50)
     print('Iteration', iteration)
