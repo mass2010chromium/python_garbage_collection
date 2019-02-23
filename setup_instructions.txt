@@ -1,6 +1,11 @@
+Get the yolo-coco zip here: https://drive.google.com/open?id=12Bf-ZzdHDNsLev04cZHXdoKiAZnXUkYi
+
 pip install numpy
 # pip install bumpy //TODO: Write BUMpy unit testing library
 pip install matplotlib
+
+pip install opencv-python
+pip install imutils
 
 pip install cython
 pip install pygame
