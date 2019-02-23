@@ -24,26 +24,12 @@ img_width, img_height = 256, 256
 
 train_samples = 100;
 
-trash_gen = datagen.flow_from_directory('data/img', target_size = (img_width, img_height), batch_size=1,
+train_gen = datagen.flow_from_directory('data/img', target_size = (img_width, img_height), batch_size=1,
                           #save_to_dir='preview/trash', save_prefix='generated', save_format='jpeg'
                           )
-null_gen = datagen.flow_from_directory('data/not', target_size = (img_width, img_height), batch_size=1,
+test_gen = datagen.flow_from_directory('validation/img', target_size = (img_width, img_height), batch_size=1,
                           #save_to_dir='preview/not', save_prefix='generated', save_format='jpeg'
                           )
-
-
-
-i = 0
-for img in trash_gen:
-    i += 1
-    print(np.array(img[0]))
-    if i > 20:
-        break  # otherwise the generator would loop indefinitely
-i = 0
-for img in null_gen:
-    i += 1
-    if i > 20:
-        break  # otherwise the generator would loop indefinitely
 
 
 if K.image_data_format() == 'channels_first':
