@@ -12,9 +12,9 @@ if K.image_data_format() == 'channels_first':
 else:
     input_shape = (img_width, img_height, 3)
 
-model = load_model(input_shape, "7.h5")
+model = load_model(input_shape, "8.h5")
 
-img = load_img('donut.jpg').resize((img_width, img_height), Image.ANTIALIAS)  # this is a PIL image
+img = load_img('newtwo.jpg').resize((img_width, img_height), Image.ANTIALIAS)  # this is a PIL image
 x = img_to_array(img)  # this is a Numpy array with shape (3, 256, 256)
 x = x.reshape((1,) + x.shape)
 
@@ -35,7 +35,9 @@ for x in img_gen:
 # for i in train_gen:
 #     prediction = model.predict(np.array(i[0]))
 #     print(str(prediction) + ", " + str(i[1]))
-#     if (round(prediction[0][0]) == i[1]):
+#     if (prediction[0][0] >= 0.5 and i[1]):
+#         correct = correct + 1
+#     elif i[1] == 0:
 #         correct = correct + 1
 #     inc = inc + 1
 #     if (inc >= 300):
