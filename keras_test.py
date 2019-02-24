@@ -1,10 +1,9 @@
 import keras
 import numpy as np
 from keras.preprocessing.image import ImageDataGenerator, img_to_array, array_to_img, load_img
-from keras.models import Sequential
-from keras.layers import Conv2D, MaxPooling2D
-from keras.layers import Activation, Dropout, Flatten, Dense
 from keras import backend as K
+
+from model_def import create_model
 
 data_gen_args = dict(featurewise_center=True,
                      featurewise_std_normalization=True,
@@ -19,16 +18,20 @@ datagen = ImageDataGenerator(**data_gen_args)
 
 img_width, img_height = 256, 256
 
+batch_size = 25
+
 # the .flow() command below generates batches of randomly transformed images
 # and saves the results to the `preview/` directory
 
 train_samples = 100;
 
-train_gen = datagen.flow_from_directory('data/img', target_size = (img_width, img_height), batch_size=1,
-                          #save_to_dir='preview/trash', save_prefix='generated', save_format='jpeg'
+train_gen = datagen.flow_from_directory('data/binary', target_size = (img_width, img_height), batch_size=1,
+                          #save_to_dir='preview/trash', save_prefix='generated', save_format='jpeg',
+                          class_mode='binary'
                           )
-test_gen = datagen.flow_from_directory('validation/img', target_size = (img_width, img_height), batch_size=1,
-                          #save_to_dir='preview/not', save_prefix='generated', save_format='jpeg'
+test_gen = datagen.flow_from_directory('validation/binary', target_size = (img_width, img_height), batch_size=1,
+                          #save_to_dir='preview/not', save_prefix='generated', save_format='jpeg',
+                          class_mode='binary'
                           )
 
 
@@ -37,22 +40,16 @@ if K.image_data_format() == 'channels_first':
 else:
     input_shape = (img_width, img_height, 3)
 
-model = Sequential()
-model.add(Conv2D(32, (3, 3), input_shape=input_shape))
-model.add(Activation('relu'))
-model.add(MaxPooling2D(pool_size=(2, 2)))
-
-model.add(Conv2D(32, (3, 3)))
-model.add(Activation('relu'))
-model.add(MaxPooling2D(pool_size=(2, 2)))
-
-model.add(Flatten())  # this converts our 3D feature maps to 1D feature vectors
-model.add(Dense(64))
-model.add(Activation('relu'))
-model.add(Dropout(0.5))
-model.add(Dense(1))
-model.add(Activation('sigmoid'))
+model = create_model(input_shape)
 
 model.compile(loss='binary_crossentropy',
               optimizer='rmsprop',
               metrics=['accuracy'])
+
+model.fit_generator(
+        train_gen,
+        steps_per_epoch=1200 // batch_size,
+        epochs=100,
+        validation_data=test_gen,
+        validation_steps=150 // batch_size)
+model.save_weights('third_try.h5')
