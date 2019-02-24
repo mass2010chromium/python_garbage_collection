@@ -2,6 +2,7 @@ from model_def import load_model
 from keras import backend as K
 import numpy as np
 from keras.preprocessing.image import ImageDataGenerator, img_to_array, array_to_img, load_img
+from PIL import Image
 
 
 img_width, img_height = 256, 256
@@ -13,7 +14,7 @@ else:
 
 model = load_model(input_shape, "4.h5")
 
-img = load_img('test3.jpg')  # this is a PIL image
+img = load_img('test2.jpg').resize((256, 256), Image.ANTIALIAS)  # this is a PIL image
 x = img_to_array(img)  # this is a Numpy array with shape (3, 256, 256)
 x = x.reshape((1,) + x.shape)
 
@@ -30,8 +31,14 @@ for x in img_gen:
 #                           )
 
 # inc = 0
+# correct = 0
 # for i in train_gen:
-#     print(model.predict(np.array(i[0])))
+#     prediction = model.predict(np.array(i[0]))
+#     print(str(prediction) + ", " + str(i[1]))
+#     if (round(prediction[0][0]) == i[1]):
+#         correct = correct + 1
 #     inc = inc + 1
-#     if (inc > 200):
+#     if (inc >= 100):
 #         break
+
+# print("Correct: " + str(correct))

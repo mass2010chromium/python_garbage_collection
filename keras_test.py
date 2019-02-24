@@ -53,7 +53,7 @@ model.fit_generator(
         train_gen,
         #steps_per_epoch=240 // batch_size,
         steps_per_epoch = 240,
-        epochs=10,
+        epochs=15,
         validation_data=test_gen,
         validation_steps = 80,
         #validation_steps=80 // batch_size
