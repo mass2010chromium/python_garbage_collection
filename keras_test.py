@@ -17,7 +17,7 @@ data_gen_args = dict(featurewise_center=True,
 
 datagen = ImageDataGenerator(**data_gen_args)
 
-img_width, img_height = 256, 256
+img_width, img_height = 512, 512
 
 batch_size = 80
 

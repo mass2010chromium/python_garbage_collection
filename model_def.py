@@ -6,11 +6,11 @@ from keras import regularizers
 def create_model(input_shape):
     model = Sequential()
     model.add(Conv2D(8, (1, 1), input_shape=input_shape))
-    model.add(Activation('tanh'))
+    model.add(Activation('relu'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
 
     model.add(Conv2D(8, (1, 1)))
-    model.add(Activation('tanh'))
+    model.add(Activation('relu'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
 
     model.add(Conv2D(16, (1, 1)))
@@ -26,6 +26,10 @@ def create_model(input_shape):
     model.add(MaxPooling2D(pool_size=(2, 2)))
 
     model.add(Conv2D(32, (3, 3)))
+    model.add(Activation('tanh'))
+    model.add(MaxPooling2D(pool_size=(2, 2)))
+
+    model.add(Conv2D(64, (3, 3)))
     model.add(Activation('tanh'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
 
