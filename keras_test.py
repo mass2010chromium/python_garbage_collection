@@ -17,7 +17,10 @@ data_gen_args = dict(featurewise_center=True,
 
 datagen = ImageDataGenerator(**data_gen_args)
 
-img_width, img_height = 512, 512
+seed = 1
+np.random.seed(seed)
+
+img_width, img_height = 256, 256
 
 batch_size = 80
 
@@ -43,7 +46,7 @@ else:
 
 model = create_model(input_shape)
 
-sgd = optimizers.SGD(lr=0.001, momentum=0.0, decay=0.0, nesterov=False)
+sgd = optimizers.SGD(lr=0.00025, momentum=0.0, decay=0.0, nesterov=False)
 model.compile(loss='binary_crossentropy',
               optimizer='rmsprop',
               metrics=['accuracy'])
@@ -53,9 +56,9 @@ model.fit_generator(
         train_gen,
         #steps_per_epoch=240 // batch_size,
         steps_per_epoch = 240,
-        epochs=15,
+        epochs=100,
         validation_data=test_gen,
         validation_steps = 80,
         #validation_steps=80 // batch_size
         )
-model.save_weights('5.h5')
+model.save_weights('7.h5')

@@ -5,16 +5,16 @@ from keras.preprocessing.image import ImageDataGenerator, img_to_array, array_to
 from PIL import Image
 
 
-img_width, img_height = 512, 512
+img_width, img_height = 256, 256
 
 if K.image_data_format() == 'channels_first':
     input_shape = (3, img_width, img_height)
 else:
     input_shape = (img_width, img_height, 3)
 
-model = load_model(input_shape, "5.h5")
+model = load_model(input_shape, "7.h5")
 
-img = load_img('-3.jpg').resize((img_width, img_height), Image.ANTIALIAS)  # this is a PIL image
+img = load_img('donut.jpg').resize((img_width, img_height), Image.ANTIALIAS)  # this is a PIL image
 x = img_to_array(img)  # this is a Numpy array with shape (3, 256, 256)
 x = x.reshape((1,) + x.shape)
 
@@ -38,7 +38,7 @@ for x in img_gen:
 #     if (round(prediction[0][0]) == i[1]):
 #         correct = correct + 1
 #     inc = inc + 1
-#     if (inc >= 100):
+#     if (inc >= 300):
 #         break
 
 # print("Correct: " + str(correct))
