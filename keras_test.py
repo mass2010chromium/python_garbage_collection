@@ -58,4 +58,4 @@ model.fit_generator(
         validation_steps = 80,
         #validation_steps=80 // batch_size
         )
-model.save_weights('4.h5')
+model.save_weights('5.h5')
