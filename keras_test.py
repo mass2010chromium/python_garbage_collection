@@ -3,7 +3,6 @@ import numpy as np
 from keras.preprocessing.image import ImageDataGenerator, img_to_array, array_to_img, load_img
 from keras import backend as K
 from keras import optimizers
-from keras.applications import VGG16
 
 from model_def import create_model
 

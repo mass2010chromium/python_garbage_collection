@@ -14,7 +14,7 @@ else:
 
 model = load_model(input_shape, "11.h5")
 
-img = load_img('pile_22.jpg').resize((img_width, img_height), Image.ANTIALIAS)  # this is a PIL image
+img = load_img('bottle_new.jpg').resize((img_width, img_height), Image.ANTIALIAS)  # this is a PIL image
 x = img_to_array(img)  # this is a Numpy array with shape (3, 256, 256)
 x = x.reshape((1,) + x.shape)
 
@@ -25,22 +25,22 @@ for x in img_gen:
     break
 
 
-# train_gen = ImageDataGenerator().flow_from_directory('data/binary', target_size = (img_width, img_height), batch_size=1,
-#                           #save_to_dir='preview/trash', save_prefix='generated', save_format='jpeg',
-#                           class_mode='binary'
-#                           )
+train_gen = ImageDataGenerator().flow_from_directory('data/binary', target_size = (img_width, img_height), batch_size=1,
+                          #save_to_dir='preview/trash', save_prefix='generated', save_format='jpeg',
+                          class_mode='binary'
+                          )
 
-# inc = 0
-# correct = 0
-# for i in train_gen:
-#     prediction = model.predict(np.array(i[0]))
-#     print(str(prediction) + ", " + str(i[1]))
-#     if (prediction[0][0] >= 0.5 and i[1]):
-#         correct = correct + 1
-#     elif i[1] == 0:
-#         correct = correct + 1
-#     inc = inc + 1
-#     if (inc >= 300):
-#         break
+inc = 0
+correct = 0
+for i in train_gen:
+    prediction = model.predict(np.array(i[0]))
+    print(str(prediction) + ", " + str(i[1]))
+    if (prediction[0][0] >= 0.5 and i[1]):
+        correct = correct + 1
+    elif i[1] == 0:
+        correct = correct + 1
+    inc = inc + 1
+    if (inc >= 300):
+        break
 
-# print("Correct: " + str(correct))
+print("Correct: " + str(correct))
