@@ -12,9 +12,9 @@ if K.image_data_format() == 'channels_first':
 else:
     input_shape = (img_width, img_height, 3)
 
-model = load_model(input_shape, "8.h5")
+model = load_model(input_shape, "11.h5")
 
-img = load_img('newtwo.jpg').resize((img_width, img_height), Image.ANTIALIAS)  # this is a PIL image
+img = load_img('pile_22.jpg').resize((img_width, img_height), Image.ANTIALIAS)  # this is a PIL image
 x = img_to_array(img)  # this is a Numpy array with shape (3, 256, 256)
 x = x.reshape((1,) + x.shape)
 

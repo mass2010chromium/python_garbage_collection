@@ -22,17 +22,17 @@ def create_model(input_shape):
     model.add(Activation('tanh'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
 
-    # model.add(Conv2D(32, (3, 3)))
-    # model.add(Activation('tanh'))
-    # model.add(MaxPooling2D(pool_size=(2, 2)))
+    model.add(Conv2D(32, (3, 3)))
+    model.add(Activation('tanh'))
+    model.add(MaxPooling2D(pool_size=(2, 2)))
 
     model.add(Conv2D(32, (3, 3)))
     model.add(Activation('tanh'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
 
-    model.add(Conv2D(64, (3, 3)))
-    model.add(Activation('tanh'))
-    model.add(MaxPooling2D(pool_size=(2, 2)))
+    # model.add(Conv2D(32, (3, 3)))
+    # model.add(Activation('tanh'))
+    # model.add(MaxPooling2D(pool_size=(2, 2)))
 
 
     model.add(Flatten())  # this converts our 3D feature maps to 1D feature vectors
